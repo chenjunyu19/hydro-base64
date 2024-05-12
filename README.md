@@ -23,14 +23,17 @@
 
 ```diff
 diff --git a/packages/ui-default/utils/base.ts b/packages/ui-default/utils/base.ts
-index 53744dbc..daaddbd6 100644
+index 53744dbc..eda8f010 100644
 --- a/packages/ui-default/utils/base.ts
 +++ b/packages/ui-default/utils/base.ts
-@@ -148,6 +148,11 @@ export const request = {
+@@ -148,6 +148,14 @@ export const request = {
        // {foo: 'bar'}
        postData = JSON.stringify(dataOrForm);
        options.contentType = 'application/json';
-+      postData = JSON.stringify({ operation: dataOrForm.operation, encodedBody: window.btoa(postData) });
++      postData = JSON.stringify({
++        operation: dataOrForm.operation,
++        encodedBody: window.Hydro.utils.base64.encode(postData)
++      });
 +      if (!options.headers) {
 +        options.headers = {};
 +      }
