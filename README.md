@@ -4,7 +4,7 @@
 
 ## 安装方法
 
-在 Hydro v4.11.2 下通过测试。Hydro 可能会发生变更，请以实际情况为准，自行调整部分操作和代码。
+在 Hydro v4.12.2 下通过测试。Hydro 可能会发生变更，请以实际情况为准，自行调整部分操作和代码。
 
 ### 服务端
 
@@ -23,15 +23,14 @@
 
 ```diff
 diff --git a/packages/ui-default/utils/base.ts b/packages/ui-default/utils/base.ts
-index 53744dbc..c0709cdd 100644
+index 53744dbc..daaddbd6 100644
 --- a/packages/ui-default/utils/base.ts
 +++ b/packages/ui-default/utils/base.ts
-@@ -147,7 +147,12 @@ export const request = {
-     } else {
+@@ -148,6 +148,11 @@ export const request = {
        // {foo: 'bar'}
        postData = JSON.stringify(dataOrForm);
-+      postData = JSON.stringify({ encodedBody: window.btoa(postData) });
        options.contentType = 'application/json';
++      postData = JSON.stringify({ operation: dataOrForm.operation, encodedBody: window.btoa(postData) });
 +      if (!options.headers) {
 +        options.headers = {};
 +      }

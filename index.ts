@@ -9,7 +9,7 @@ function assign(dest, src) {
 }
 
 export async function apply(ctx: Context) {
-    ctx.on('handler/before', (h) => {
+    ctx.on('handler/init', (h) => {
         if (h.request.headers['x-hydro-encoding'] === 'base64') {
             const payload = JSON.parse(Buffer.from(h.request.body.encodedBody, 'base64').toString());
             assign(h.request.body, payload);
